@@ -90,6 +90,7 @@ const CreateAccountForm = () => {
         />
       </div>
       <Button
+        className='cursor-pointer'
         onClick={handleCreateUser}
         disabled={!inputsFilled || creatingAccount}
       >

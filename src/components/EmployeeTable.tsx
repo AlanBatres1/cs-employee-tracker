@@ -142,41 +142,41 @@ const EmployeeTable = () => {
 
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="outline" className="text-sm text-gray-600">
+                                <Button variant="outline" className="text-sm text-gray-600 cursor-pointer">
                                     Name
                                     {sortBy === "name" ? <FaCaretDown className="ml-2" /> : sortBy === "name-reverse" ? <FaCaretUp className="ml-2" /> : ""}
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
-                                <DropdownMenuItem onClick={() => changeSortBy("name")}>A-Z</DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => changeSortBy("name-reverse")}>Z-A</DropdownMenuItem>
+                                <DropdownMenuItem className='cursor-pointer' onClick={() => changeSortBy("name")}>A-Z</DropdownMenuItem>
+                                <DropdownMenuItem className='cursor-pointer' onClick={() => changeSortBy("name-reverse")}>Z-A</DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
 
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Button variant="outline" className="text-sm text-gray-600">
+                                <Button variant="outline" className="text-sm text-gray-600 cursor-pointer">
                                     Hire date
                                     {sortBy === "hire-date" ? <FaCaretDown className="ml-2" /> : sortBy === "hire-date-reverse" ? <FaCaretUp className="ml-2" /> : ""}
                                 </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
-                                <DropdownMenuItem onClick={() => changeSortBy("hire-date")}>Newest First</DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => changeSortBy("hire-date-reverse")}>Oldest First</DropdownMenuItem>
+                                <DropdownMenuItem className='cursor-pointer' onClick={() => changeSortBy("hire-date")}>Newest First</DropdownMenuItem>
+                                <DropdownMenuItem className='cursor-pointer' onClick={() => changeSortBy("hire-date-reverse")}>Oldest First</DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
 
                         <select
-                            className="ml-3 text-sm border rounded p-1"
+                            className="ml-3 text-sm border rounded p-1 cursor-pointer"
                             value={sortBy === "job-title" ? sortByJob : ""}
                             onChange={changeSortByJob}
                         >
                             <option value="" disabled>
                                 Job title
                             </option>
-                            <option value="Customer Support">Customer Support</option>
-                            <option value="IT Support Specialist">IT Support Specialist</option>
-                            <option value="Software Engineer">Software Engineer</option>
+                            <option className='cursor-pointer' value="Customer Support">Customer Support</option>
+                            <option className='cursor-pointer' value="IT Support Specialist">IT Support Specialist</option>
+                            <option className='cursor-pointer' value="Software Engineer">Software Engineer</option>
                         </select>
                     </div>
                 </div>
@@ -210,7 +210,7 @@ const EmployeeTable = () => {
                                 <TableCell>{employee.hireDate}</TableCell>
                                 <TableCell className="flex gap-3 justify-end">
                                     <EmployeeModal type="Edit" employee={employee} refreshEmployees={handleGetEmployees} />
-                                    <Button variant="destructive" onClick={() => handleDeleteEmployee(employee.id)}>
+                                    <Button variant="destructive" className='cursor-pointer' onClick={() => handleDeleteEmployee(employee.id)}>
                                         Delete
                                     </Button>
                                 </TableCell>
