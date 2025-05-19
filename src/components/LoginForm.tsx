@@ -1,19 +1,19 @@
 "use client";
 
-import { useLoginContext } from "@/lib/context/context";
-import { login } from "@/lib/services/user-services";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { Label } from "./ui/label";
-import { AiOutlineLoading } from "react-icons/ai";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Checkbox } from "./ui/checkbox";
-import Link from "next/link";
+import { useAppContext } from '@/lib/context/context';
+import { login } from '@/lib/services/user-services';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
+import { Label } from './ui/label';
+import { AiOutlineLoading } from 'react-icons/ai';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Checkbox } from './ui/checkbox';
+import Link from 'next/link';
 
 const LoginForm = () => {
-  const { push } = useRouter();
-  const { isLoggedIn, setIsLoggedIn } = useLoginContext();
+    const { push } = useRouter();
+    const { isLoggedIn, setIsLoggedIn } = useAppContext();
 
   const [user, setUser] = useState({ email: "", password: "" });
   const [rememberMe, setRememberMe] = useState(false);
