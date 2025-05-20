@@ -9,6 +9,7 @@ import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import { Button } from './ui/button';
 import { TableHeader, TableRow, TableHead, TableBody, TableCell, Table } from './ui/table';
 import EmployeeModal from './EmployeeModal';
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 const EmployeeTable = () => {
     const { push } = useRouter();
@@ -16,6 +17,12 @@ const EmployeeTable = () => {
     // useStates
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [sortedEmployees, setSortedEmployees] = useState<Employee[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const employeesPerPage = 5;
+    const indexOfLastEmployee = currentPage * employeesPerPage;
+    const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+    const currentEmployees = sortedEmployees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+    const totalPages = Math.ceil(sortedEmployees.length / employeesPerPage);
 
     const [token, setToken] = useState('');
 
@@ -104,14 +111,10 @@ const EmployeeTable = () => {
                     sortingEmployees.sort((a: Employee, b: Employee) => b.name.localeCompare(a.name));
                     break;
                 case "hire-date":
-                    sortingEmployees.sort(
-                        (a: Employee, b: Employee) => Number(new Date(b.hireDate)) - Number(new Date(a.hireDate))
-                    );
+                    sortingEmployees.sort((a: Employee, b: Employee) => Number(new Date(b.hireDate)) - Number(new Date(a.hireDate)));
                     break;
                 case "hire-date-reverse":
-                    sortingEmployees.sort(
-                        (a: Employee, b: Employee) => Number(new Date(a.hireDate)) - Number(new Date(b.hireDate))
-                    );
+                    sortingEmployees.sort((a: Employee, b: Employee) => Number(new Date(a.hireDate)) - Number(new Date(b.hireDate)));
                     break;
                 case "job-title":
                     sortingEmployees.filter((employee: Employee) => employee.jobTitle == sortByJob);
@@ -203,7 +206,7 @@ const EmployeeTable = () => {
                             <TableCell></TableCell>
                         </TableRow>
                     ) : (
-                        sortedEmployees.map((employee, idx) => (
+                        currentEmployees.map((employee, idx) => (
                             <TableRow key={idx}>
                                 <TableCell className="font-medium">{employee.name}</TableCell>
                                 <TableCell>{employee.jobTitle}</TableCell>
@@ -219,6 +222,37 @@ const EmployeeTable = () => {
                     )}
                 </TableBody>
             </Table>
+            {/* Pagination */}
+            <div className='flex justify-center relative'>
+                {sortedEmployees.length > employeesPerPage && (
+                    <Pagination className="mt-4 justify-center">
+                        <PaginationContent>
+                            <PaginationItem>
+                                <PaginationPrevious className="cursor-pointer"
+                                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                                />
+                            </PaginationItem>
+
+                            {Array.from({ length: totalPages }, (_, i) => (
+                                <PaginationItem key={i}>
+                                    <PaginationLink className="cursor-pointer"
+                                        isActive={currentPage === i + 1}
+                                        onClick={() => setCurrentPage(i + 1)}
+                                    >
+                                        {i + 1}
+                                    </PaginationLink>
+                                </PaginationItem>
+                            ))}
+                            <PaginationItem>
+                                <PaginationNext className="cursor-pointer"
+                                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                                />
+                            </PaginationItem>
+                        </PaginationContent>
+                    </Pagination>
+                )}
+            </div>
+
             {/* Display table - End */}
         </>
     )
