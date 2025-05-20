@@ -100,7 +100,7 @@ const EmployeeTable = () => {
 
     // Sorting the employees
     useEffect(() => {
-        const sortingEmployees = employees;
+        let sortingEmployees = [...employees];
 
         const handleSorting = () => {
             switch (sortBy) {
@@ -117,7 +117,7 @@ const EmployeeTable = () => {
                     sortingEmployees.sort((a: Employee, b: Employee) => Number(new Date(a.hireDate)) - Number(new Date(b.hireDate)));
                     break;
                 case "job-title":
-                    sortingEmployees.filter((employee: Employee) => employee.jobTitle == sortByJob);
+                    sortingEmployees = sortingEmployees.filter((employee: Employee) => employee.jobTitle === sortByJob);
                     break;
                 default:
                     sortingEmployees.sort((a: Employee, b: Employee) => a.id - b.id);
