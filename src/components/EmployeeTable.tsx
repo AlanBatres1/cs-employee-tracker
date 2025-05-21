@@ -221,7 +221,7 @@ const EmployeeTable = () => {
                                 <TableCell>{employee.jobTitle}</TableCell>
                                 <TableCell>{employee.hireDate}</TableCell>
                                 <TableCell className="flex gap-3 justify-end">
-                                    <Button onClick={() => handleViewEmployee(employee.id)}>
+                                    <Button className='cursor-pointer' onClick={() => handleViewEmployee(employee.id)}>
                                         View
                                     </Button>
                                     <EmployeeModal type="Edit" employee={employee} refreshEmployees={handleGetEmployees} />
