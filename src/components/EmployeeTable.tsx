@@ -222,6 +222,7 @@ const EmployeeTable = () => {
                     )}
                 </TableBody>
             </Table>
+                {/* Display table - End */}
             {/* Pagination */}
             <div className='flex justify-center relative'>
                 {sortedEmployees.length > employeesPerPage && (
@@ -253,7 +254,6 @@ const EmployeeTable = () => {
                 )}
             </div>
 
-            {/* Display table - End */}
         </>
     )
 }
